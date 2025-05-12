@@ -80,6 +80,11 @@ def delete(node, value):
         elif node.right is None:
             return node.left
         # 자식이 2개인 경우
+        min_larger_node = node.right
+        while min_larger_node.left:
+            min_larger_node = min_larger_node.left
+        node.data = min_larger_node.data
+        node.right = delete(node.right, min_larger_node.data)
     return node
 
 
@@ -108,3 +113,8 @@ if __name__ == "__main__":
     del_number = int(input("제거할 값 : "))
     root = delete(root, del_number)
     post_order(root)
+    print()
+    in_order(root)
+    print()
+    pre_order(root)
+    print()
